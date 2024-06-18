@@ -12,9 +12,11 @@ class TodoApp extends StatelessWidget {
     return MaterialApp(
       title: "Flutter Todo App",
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          primarySwatch: Colors.teal,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(fontSize: 18),
+          )),
       home: const TodoListScreen(),
     );
   }
@@ -56,6 +58,9 @@ class _TodoListScreenState extends State<TodoListScreen> {
                 _addTodoItem(val);
                 Navigator.pop(context);
               },
+              decoration: const InputDecoration(
+                hintText: 'Escribe una tarea',
+              ),
             ),
             actions: <Widget>[
               TextButton(
@@ -68,11 +73,14 @@ class _TodoListScreenState extends State<TodoListScreen> {
   }
 
   Widget _buildTodoItem(String task, int index) {
-    return ListTile(
-      title: Text(task),
-      trailing: IconButton(
-        icon: const Icon(Icons.delete),
-        onPressed: () => _removeTodoItem(index),
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: ListTile(
+        title: Text(task),
+        trailing: IconButton(
+          icon: const Icon(Icons.delete),
+          onPressed: () => _removeTodoItem(index),
+        ),
       ),
     );
   }
